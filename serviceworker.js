@@ -26,7 +26,6 @@ self.addEventListener('install', event => {
   event.waitUntil(preCache());
 })
 
-
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
@@ -42,6 +41,12 @@ self.addEventListener('activate', event => {
   )
 })
 
+// self.addEventListener('fetch', event => {
+//   event.respondWith(
+//     getCache(event.request)
+//   )
+// })
+
 
 function preCache() {
   return caches
@@ -54,3 +59,27 @@ function preCache() {
 }
 
 
+function getCache(request) {
+  fetch(request)
+    .catch(() => {
+      console.log('cant find fetch');
+      caches.match(request)
+    });
+
+  return caches.open(cacheName)
+    .then(cache => {
+      return cache.match(request)
+        .then( matching => {
+          return matching || Promise.reject('no-match')
+        })
+
+    })
+  
+  // caches.match(request)
+  //   .then(response => {
+  //     if (response) {return response}
+  //       return fetch(request)
+
+  //   })
+  //   .catch(error => console.log(`An error with fectching ${error}`))
+}
