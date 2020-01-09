@@ -1,3 +1,12 @@
+/*
+* Service Worker registration 
+*/
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./serviceWorker', {scope:'./'}) 
+    .then(registration => console.log('Registration successful ' + registration))
+    .catch(error => console.log('NOT successful, An error occured ' + error));
+}
+
 let restaurants,
   neighborhoods,
   cuisines
