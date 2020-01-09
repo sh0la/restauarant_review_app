@@ -2,9 +2,12 @@
 * Service Worker registration 
 */
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./serviceWorker.js', {scope:'./'}) 
-    .then(registration => console.log('Registration successful ' + registration))
-    .catch(error => console.log('NOT successful, An error occured ' + error));
+  //window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('../serviceworker.js') 
+      .then(reg => console.log(`Registration successful  ${reg}`))
+      .catch(error => console.log(`NOT successful, An error occured ${error}`));
+  //  });
 }
 
 let restaurants,
