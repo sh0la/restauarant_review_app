@@ -99,7 +99,7 @@ nav h1 a {
 }
 /* ====================== Map ====================== */
 #map {
-  height: 400px;
+  height: 500px;
   width: 100%;
   background-color: #ccc;
 }
@@ -136,6 +136,7 @@ nav h1 a {
   margin: 0;
   padding: 30px 15px 60px;
   text-align: center;
+  
 }
 #restaurants-list li {
   background-color: #fff;
