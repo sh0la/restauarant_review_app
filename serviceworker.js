@@ -1,5 +1,5 @@
 
-let cacheName = 'cache_v1';
+let cacheName = 'cache_v7';
 const listOfPages = [
     './index.html',
     './README.md',
@@ -33,7 +33,9 @@ self.addEventListener('activate', event => {
         return Promise.all(
           cacheNames.map(cache => {
             if (cache !== cacheName ) {
+              console.log('deleted old cache success')
               return caches.delete(cache);
+              
             }
           })
         )
@@ -41,11 +43,23 @@ self.addEventListener('activate', event => {
   )
 })
 
-// self.addEventListener('fetch', event => {
-//   event.respondWith(
-//     getCache(event.request)
-//   )
-// })
+self.addEventListener('fetch', event => {
+  console.log('Fetch event for ', event.request.url)
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          console.log('Found', event.request.url, 'in cache')
+          return response;
+        }
+        console.log('network request for ', event.request.url)
+        return fetch(event.request)
+          
+      }) .catch(error => {
+
+      })
+  )
+})
 
 
 function preCache() {
@@ -53,33 +67,9 @@ function preCache() {
     .open(cacheName)
     .then(cache => {
       cache.addAll(listOfPages)
+      console.log('Cached it successfully');
+    })
     .then(() => skipWaiting())
     .catch(error => console.log(`An error occured with caching ${error}`))
-    })
 }
 
-
-function getCache(request) {
-  fetch(request)
-    .catch(() => {
-      console.log('cant find fetch');
-      caches.match(request)
-    });
-
-  return caches.open(cacheName)
-    .then(cache => {
-      return cache.match(request)
-        .then( matching => {
-          return matching || Promise.reject('no-match')
-        })
-
-    })
-  
-  // caches.match(request)
-  //   .then(response => {
-  //     if (response) {return response}
-  //       return fetch(request)
-
-  //   })
-  //   .catch(error => console.log(`An error with fectching ${error}`))
-}

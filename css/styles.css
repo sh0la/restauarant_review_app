@@ -278,3 +278,19 @@ nav h1 a {
 #restaurant-hours td {
   color: #666;
 }
+
+@media screen and (max-width: 800px) {
+  #restaurants-listing {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+  }
+
+}
+
+
+@media screen and (max-width: 400px) {
+
+  
+}

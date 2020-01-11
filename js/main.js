@@ -2,12 +2,12 @@
 * Service Worker registration 
 */
 if ('serviceWorker' in navigator) {
-  //window.addEventListener('load', () => {
+  window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('../serviceworker.js') 
+      .register('./serviceworker.js') 
       .then(reg => console.log(`Registration successful  ${reg}`))
       .catch(error => console.log(`NOT successful, An error occured ${error}`));
-  //  });
+    });
 }
 
 let restaurants,
@@ -90,7 +90,7 @@ initMap = () => {
         scrollWheelZoom: false
       });
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-    mapboxToken: '<pk.eyJ1Ijoic2hvbGEiLCJhIjoiY2s1Nms3a251MDdydTNrcGRhb2FjZzB1MCJ9.Tq4f8TR2NYKLsyKmG2mSZA>',
+    mapboxToken: 'pk.eyJ1Ijoic2hvbGEiLCJhIjoiY2s1Nms3a251MDdydTNrcGRhb2FjZzB1MCJ9.Tq4f8TR2NYKLsyKmG2mSZA',
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
