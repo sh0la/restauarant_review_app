@@ -1,5 +1,5 @@
 
-let cacheName = 'cache_v1';
+let cacheName = 'cache_v3';
 const listOfPages = [
     './index.html',
     './README.md',
@@ -56,7 +56,7 @@ self.addEventListener('fetch', event => {
         return fetch(event.request)
           
       }) .catch(error => {
-
+          
       })
   )
 })
