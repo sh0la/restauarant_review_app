@@ -72,29 +72,3 @@ function preCache() {
     .then(() => skipWaiting())
     .catch(error => console.log(`An error occured with caching ${error}`))
 }
-
-
-// function getCache(request) {
-//   fetch(request)
-//     .catch(() => {
-//       console.log('cant find fetch');
-//  n      caches.match(request)
-//     });
-
-//   return caches.open(cacheName)
-//     .then(cache => {
-//       return cache.match(request)
-//         .then( matching => {
-//           return matching || Promise.reject('no-match')
-//         })
-
-//     })
-  
-//   // caches.match(request)
-//   //   .then(response => {
-//   //     if (response) {return response}
-//   //       return fetch(request)
-
-//   //   })
-//   //   .catch(error => console.log(`An error with fectching ${error}`))
-// }
